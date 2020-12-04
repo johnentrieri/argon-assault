@@ -22,32 +22,16 @@ public class Player : MonoBehaviour
     }
 
     private void ProcessHorizontalMovement() {
-        float horizontalThrow = Input.GetAxis("Horizontal");
-        float xTarget = xMax * horizontalThrow;
-
-        //Move Right
-        if ( (xTarget - transform.localPosition.x) > (xSpeed * Time.deltaTime) ) {
-            transform.Translate(Vector3.right * xSpeed * Time.deltaTime);
-        } 
-        
-        //Move Left
-        if ( (transform.localPosition.x - xTarget) > (xSpeed * Time.deltaTime) ) {
-            transform.Translate(Vector3.left * xSpeed * Time.deltaTime);
-        }
+        float xThrow = Input.GetAxis("Horizontal");
+        float xOffset = xThrow * xSpeed * Time.deltaTime;
+        float xNew = Mathf.Clamp(transform.localPosition.x + xOffset, -1.0f * xMax, xMax);
+        transform.localPosition = new Vector3(xNew,transform.localPosition.y,transform.localPosition.z);
     }
 
     private void ProcessVerticalMovement() {
-        float verticalThrow = Input.GetAxis("Vertical");
-        float yTarget = yMax * verticalThrow;
-
-        //Move Up
-        if ( (yTarget - transform.localPosition.y) > (ySpeed * Time.deltaTime) ) {
-            transform.Translate(Vector3.up * ySpeed * Time.deltaTime);
-        } 
-
-        //Move Down       
-        if ( (transform.localPosition.y - yTarget) > (ySpeed * Time.deltaTime) ) {
-            transform.Translate(Vector3.down * ySpeed * Time.deltaTime);
-        }
+        float yThrow = Input.GetAxis("Vertical");
+        float yOffset = yThrow * ySpeed * Time.deltaTime;
+        float yNew = Mathf.Clamp(transform.localPosition.y + yOffset, -1.0f * yMax, yMax);
+        transform.localPosition = new Vector3(transform.localPosition.x,yNew,transform.localPosition.z);
     }
 }
