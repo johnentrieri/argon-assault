@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] float xSpeed, ySpeed;
     [SerializeField] float xMax, yMax;
     private float xThrow, yThrow;
-    [SerializeField] float yawFactor, positionPitchFactor, controlPitchFactor, rollFactor;
+    [SerializeField] float yawPositionFactor, yawControlFactor, positionPitchFactor, controlPitchFactor, rollFactor;
     [SerializeField] float aimDistance;
     
 
@@ -26,6 +26,18 @@ public class Player : MonoBehaviour
         ProcessNormalRotation();
     }
 
+    void onCollisionEnter(Collision collision) {
+        print(collision.gameObject.tag);
+        
+        switch(collision.gameObject.tag) {
+            case "Terrain":
+                print("Terrain Collision");
+                break;
+            default:
+                break;
+        }
+    }
+
     private void ProcessTranslation() {
         xThrow = Input.GetAxis("Horizontal");
         yThrow = Input.GetAxis("Vertical");
@@ -41,7 +53,7 @@ public class Player : MonoBehaviour
     }
 
     private void ProcessNormalRotation() {
-        float yaw = transform.localPosition.x * yawFactor;
+        float yaw = (transform.localPosition.x * yawPositionFactor) + (xThrow * yawControlFactor);
         float pitch = (transform.localPosition.y * positionPitchFactor) + (yThrow * controlPitchFactor);
         float roll = (xThrow * rollFactor);
 
