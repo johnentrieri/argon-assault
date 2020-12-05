@@ -7,8 +7,10 @@ public class Player : MonoBehaviour
 {
     [SerializeField] float xSpeed, ySpeed;
     [SerializeField] float xMax, yMax;
-
+    private float xThrow, yThrow;
+    [SerializeField] float yawFactor, positionPitchFactor, controlPitchFactor, rollFactor;
     [SerializeField] float aimDistance;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -20,12 +22,13 @@ public class Player : MonoBehaviour
     void Update()
     {
         ProcessTranslation();
-        ProcessRotation();
+        //ProcessAimRotation();
+        ProcessNormalRotation();
     }
 
     private void ProcessTranslation() {
-        float xThrow = Input.GetAxis("Horizontal");
-        float yThrow = Input.GetAxis("Vertical");
+        xThrow = Input.GetAxis("Horizontal");
+        yThrow = Input.GetAxis("Vertical");
 
         float xOffset = xThrow * xSpeed * Time.deltaTime;
         float yOffset = yThrow * ySpeed * Time.deltaTime;
@@ -37,7 +40,15 @@ public class Player : MonoBehaviour
         transform.localPosition = new Vector3(transform.localPosition.x,yNew,transform.localPosition.z);
     }
 
-    private void ProcessRotation() {
+    private void ProcessNormalRotation() {
+        float yaw = transform.localPosition.x * yawFactor;
+        float pitch = (transform.localPosition.y * positionPitchFactor) + (yThrow * controlPitchFactor);
+        float roll = (xThrow * rollFactor);
+
+        transform.localRotation = Quaternion.Euler(pitch,yaw,roll);
+
+    }
+    private void ProcessAimRotation() {
         float xShip =  Camera.main.WorldToScreenPoint(transform.position).x;
         float yShip =  Camera.main.WorldToScreenPoint(transform.position).y;
 

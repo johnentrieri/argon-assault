@@ -656,11 +656,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 126b17f65bc87eb48929cd1acb146c7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xSpeed: 20
-  ySpeed: 20
+  xSpeed: 40
+  ySpeed: 40
   xMax: 12
   yMax: 8
-  aimDistance: 600
+  yawFactor: 2
+  positionPitchFactor: -2
+  controlPitchFactor: -20
+  rollFactor: -20
+  aimDistance: 200
 --- !u!1 &1241664114
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,7 +812,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4433942057210488, guid: f805c7b2f982faf43833878e4f22ae2a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4433942057210488, guid: f805c7b2f982faf43833878e4f22ae2a, type: 3}
       propertyPath: m_LocalRotation.w
