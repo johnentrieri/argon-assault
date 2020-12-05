@@ -3,39 +3,45 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Player : MonoBehaviour
-{
-    [SerializeField] float xSpeed, ySpeed;
-    [SerializeField] float xMax, yMax;
-    private float xThrow, yThrow;
-    [SerializeField] float yawPositionFactor, yawControlFactor, positionPitchFactor, controlPitchFactor, rollFactor;
+public class PlayerController : MonoBehaviour {
+
+    [Header("Movement Speed")]
+    [SerializeField] float xSpeed;
+    [SerializeField] float ySpeed;
+
+    [Header("Screen Limits")]
+    [SerializeField] float xMax;
+    [SerializeField] float yMax;
+
+    [Header("Rotation")]  
+    [SerializeField] float positionYawFactor;
+    [SerializeField] float controlYawFactor;
+    [SerializeField] float positionPitchFactor;
+    [SerializeField] float controlPitchFactor;
+    [SerializeField] float rollFactor;
     [SerializeField] float aimDistance;
-    
+
+    private float xThrow;
+    private float yThrow;
+    private bool isControlEnabled;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        
+    void Start() {
+        isControlEnabled = true;
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
+        if (!isControlEnabled) { return; }
+
         ProcessTranslation();
         //ProcessAimRotation();
         ProcessNormalRotation();
     }
 
-    void onCollisionEnter(Collision collision) {
-        print(collision.gameObject.tag);
-        
-        switch(collision.gameObject.tag) {
-            case "Terrain":
-                print("Terrain Collision");
-                break;
-            default:
-                break;
-        }
+    
+    public void OnPlayerDeath() { //Called by String Reference
+        isControlEnabled = false; 
     }
 
     private void ProcessTranslation() {
@@ -53,7 +59,7 @@ public class Player : MonoBehaviour
     }
 
     private void ProcessNormalRotation() {
-        float yaw = (transform.localPosition.x * yawPositionFactor) + (xThrow * yawControlFactor);
+        float yaw = (transform.localPosition.x * positionYawFactor) + (xThrow * controlYawFactor);
         float pitch = (transform.localPosition.y * positionPitchFactor) + (yThrow * controlPitchFactor);
         float roll = (xThrow * rollFactor);
 
@@ -70,13 +76,9 @@ public class Player : MonoBehaviour
         float xDepth = Mathf.Sqrt( (aimDistance * aimDistance) + (xDiff * xDiff) );
         float yDepth = Mathf.Sqrt( (aimDistance * aimDistance) + (yDiff * yDiff) );
 
-        //DEBUG
-        print("Ship: (" + xShip + "," + yShip + ")   Mouse: (" + Input.mousePosition.x + "," + Input.mousePosition.y + ")");
-
-
         float xTheta = Mathf.Atan( xDiff / xDepth ) * (180.0f / Mathf.PI);
         float yTheta = Mathf.Atan( yDiff / yDepth ) * (180.0f / Mathf.PI);
 
         transform.localRotation = Quaternion.Euler(yTheta,xTheta,0f);
-    }
+    }    
 }
