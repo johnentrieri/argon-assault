@@ -7,10 +7,11 @@ public class CollisionHandler : MonoBehaviour
 {
     [SerializeField] float levelLoadDelay;
     [SerializeField] GameObject explosion;
+    private Renderer rend;
 
     // Start is called before the first frame update
     void Start() {
-
+        rend = gameObject.GetComponent<Renderer>();
     }
 
     // Update is called once per frame
@@ -24,6 +25,7 @@ public class CollisionHandler : MonoBehaviour
 
     private void StartDeathSequence() {
         SendMessage("OnPlayerDeath");
+        rend.enabled = false;
         explosion.SetActive(true);
         Invoke("ResetLevel",levelLoadDelay);
     }
