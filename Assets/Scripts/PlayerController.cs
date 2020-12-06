@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] float rollFactor;
     [SerializeField] float aimDistance;
 
+    [Header("Guns")]
+    [SerializeField] GameObject[] guns;
+
     private float xThrow;
     private float yThrow;
     private bool isControlEnabled;
@@ -37,11 +40,33 @@ public class PlayerController : MonoBehaviour {
         ProcessTranslation();
         //ProcessAimRotation();
         ProcessNormalRotation();
+        ProcessFiring();
     }
 
     
     public void OnPlayerDeath() { //Called by String Reference
-        isControlEnabled = false; 
+        isControlEnabled = false;
+        DeactivateGuns();
+    }
+
+    private void ActivateGuns() {
+        foreach(GameObject gun in guns ) {
+            gun.SetActive(true);
+        }
+    }
+
+    private void DeactivateGuns() {
+        foreach(GameObject gun in guns ) {
+            gun.SetActive(false);
+        }
+    }
+
+    private void ProcessFiring() {
+       if( Input.GetButton("Fire1") ) {
+           ActivateGuns();
+       } else {
+            DeactivateGuns();
+       }
     }
 
     private void ProcessTranslation() {
