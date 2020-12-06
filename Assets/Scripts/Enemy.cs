@@ -4,16 +4,25 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] GameObject explosion;
-    [SerializeField] Transform runtimeSpawnParent;
+    [Header("Stats")]
     [SerializeField] int pointValue = 100;
+    [SerializeField] int maxHealth = 1;
+
+    [Header("Visual Effects")]
+    [SerializeField] GameObject explosion;
+
+    [Header("Development")]
+    [SerializeField] Transform runtimeSpawnParent;
+
 
     Scoreboard scoreboard;
     private bool isAlive;
+    private int health;
 
     // Start is called before the first frame update
     void Start()
     {
+        health = maxHealth;
         AddNonTriggerBoxCollider();
         scoreboard = FindObjectOfType<Scoreboard>();
         isAlive = true;
@@ -26,7 +35,13 @@ public class Enemy : MonoBehaviour
     }
 
     void OnParticleCollision(GameObject other) {
-        ProcessEnemyDeath();
+        ProcessEnemyDamage();
+    }
+
+    void ProcessEnemyDamage() {
+        if ( --health <= 0) {
+            ProcessEnemyDeath();
+        }
     }
 
     private void ProcessEnemyDeath() {

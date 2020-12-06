@@ -513,9 +513,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5cfe6d3048301e4fa17be1155ae2aea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointValue: 100
+  maxHealth: 2
   explosion: {fileID: 1570171288654123529, guid: 07a3424c7bed30346b2679658dfc0564, type: 3}
   runtimeSpawnParent: {fileID: 1293898103}
-  pointValue: 100
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,9 +789,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5cfe6d3048301e4fa17be1155ae2aea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointValue: 500
+  maxHealth: 5
   explosion: {fileID: 1570171288654123529, guid: 07a3424c7bed30346b2679658dfc0564, type: 3}
   runtimeSpawnParent: {fileID: 1293898103}
-  pointValue: 500
 --- !u!1 &1111372125
 GameObject:
   m_ObjectHideFlags: 0
@@ -1052,9 +1054,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5cfe6d3048301e4fa17be1155ae2aea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointValue: 100
+  maxHealth: 2
   explosion: {fileID: 1570171288654123529, guid: 07a3424c7bed30346b2679658dfc0564, type: 3}
   runtimeSpawnParent: {fileID: 1293898103}
-  pointValue: 100
 --- !u!1 &1648701631
 GameObject:
   m_ObjectHideFlags: 0
@@ -1243,9 +1246,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5cfe6d3048301e4fa17be1155ae2aea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointValue: 100
+  maxHealth: 2
   explosion: {fileID: 1570171288654123529, guid: 07a3424c7bed30346b2679658dfc0564, type: 3}
   runtimeSpawnParent: {fileID: 1293898103}
-  pointValue: 100
 --- !u!1 &1878901671
 GameObject:
   m_ObjectHideFlags: 0
