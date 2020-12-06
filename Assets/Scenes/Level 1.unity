@@ -624,7 +624,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74fcee85c39daae45b9794d9fd771d6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scorePerHit: 100
 --- !u!1 &1161298606
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,6 +808,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 562050622}
     m_Modifications:
+    - target: {fileID: 2466898309930395013, guid: 288c5b484fef50f4ba3f47a0e63e8698, type: 3}
+      propertyPath: pointValue
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 2466898309930395013, guid: 288c5b484fef50f4ba3f47a0e63e8698, type: 3}
       propertyPath: runtimeSpawnParent
       value: 
