@@ -26,12 +26,11 @@ public class Enemy : MonoBehaviour
     }
 
     void OnParticleCollision(GameObject other) {
-        if (isAlive) {
-            ProcessEnemyDeath();
-        }
+        ProcessEnemyDeath();
     }
 
     private void ProcessEnemyDeath() {
+        if (!isAlive) { return; }
         isAlive = false;
         scoreboard.ScoreHit(pointValue);
         Instantiate(explosion,transform.position,Quaternion.identity,runtimeSpawnParent.transform);
