@@ -5022,8 +5022,8 @@ MonoBehaviour:
   ySpeed: 40
   xMax: 12
   yMax: 8
-  positionYawFactor: 0
-  controlYawFactor: 0
+  positionYawFactor: 2
+  controlYawFactor: 20
   positionPitchFactor: -2
   controlPitchFactor: -12
   rollFactor: -20
