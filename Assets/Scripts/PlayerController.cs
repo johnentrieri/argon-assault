@@ -46,26 +46,21 @@ public class PlayerController : MonoBehaviour {
     
     public void OnPlayerDeath() { //Called by String Reference
         isControlEnabled = false;
-        DeactivateGuns();
+        SetGunsActive(false);
     }
 
-    private void ActivateGuns() {
+    private void SetGunsActive(bool isActive) {
         foreach(GameObject gun in guns ) {
-            gun.SetActive(true);
-        }
-    }
-
-    private void DeactivateGuns() {
-        foreach(GameObject gun in guns ) {
-            gun.SetActive(false);
+            ParticleSystem.EmissionModule gunEmitter = gun.GetComponent<ParticleSystem>().emission;
+            gunEmitter.enabled = isActive;
         }
     }
 
     private void ProcessFiring() {
        if( Input.GetButton("Fire1") ) {
-           ActivateGuns();
+            SetGunsActive(true);
        } else {
-            DeactivateGuns();
+            SetGunsActive(false);
        }
     }
 
